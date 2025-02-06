@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:news_app/main.dart';
 import 'package:news_app/models/categories_model.dart';
 import 'package:news_app/utils/colors.dart';
-import 'package:news_app/view_models/news_view_model.dart';
+import 'package:news_app/models/view_models/news_view_model.dart';
 import 'package:news_app/widgets/general_news_section.dart';
 import 'package:news_app/widgets/my_drawer.dart';
 import 'package:news_app/widgets/spinkit_container.dart';
@@ -47,7 +47,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         child: Column(
           children: [
             SizedBox(
-              height: 50,
+              height: mq.height * 0.05,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: categoriesList.length,
@@ -86,7 +86,6 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 },
               ),
             ),
-            const SizedBox(height: 12),
             Expanded(
               child: FutureBuilder<CategoryModel>(
                 future: newsViewModel.categoryRepository(categories),

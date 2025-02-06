@@ -12,7 +12,6 @@ Widget generateNewsSection(BuildContext context,
   var articles = snapshot.data!.articles!;
 
   return ListView.separated(
-    shrinkWrap: true,
     itemCount: articles.length,
     itemBuilder: (context, index) {
       DateTime datetime =
@@ -52,7 +51,7 @@ Widget generateNewsSection(BuildContext context,
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Container(
+                child: SizedBox(
                   height: mq.height * .18,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

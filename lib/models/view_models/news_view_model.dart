@@ -1,6 +1,6 @@
 import 'package:news_app/models/categories_model.dart';
 import 'package:news_app/models/news_model.dart';
-import 'package:news_app/repository/news_repository.dart';
+import 'package:news_app/models/services/news_repository.dart';
 
 class NewsViewModel {
   final _repo = NewsRepository();

@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:news_app/utils/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DetailsScreen extends StatelessWidget {
@@ -55,7 +54,8 @@ class DetailsScreen extends StatelessWidget {
                 CachedNetworkImage(
                   height: mq.height * .35,
                   width: mq.width,
-                  imageUrl: newsImage,
+                  imageUrl: newsImage ??
+                      'https://demofree.sirv.com/nope-not-here.jpg',
                   fit: BoxFit.cover,
                   placeholder: (context, url) => const Center(
                       child: CircularProgressIndicator(color: Colors.blue)),
@@ -111,12 +111,14 @@ class DetailsScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          newsAuthor.isNotEmpty ? newsAuthor : "Unknown",
-                          style: GoogleFonts.poppins(
-                            fontSize: mq.height * 0.02, // Adjusted font size
-                            fontWeight: FontWeight.w600,
-                            color: Colors.blue,
+                        Expanded(
+                          child: Text(
+                            newsAuthor.isNotEmpty ? newsAuthor : "Unknown",
+                            style: GoogleFonts.poppins(
+                              fontSize: mq.height * 0.02, // Adjusted font size
+                              fontWeight: FontWeight.w600,
+                              color: Colors.blue,
+                            ),
                           ),
                         ),
                         Text(
@@ -151,11 +153,10 @@ class DetailsScreen extends StatelessWidget {
                   const SizedBox(height: 20),
                   Divider(color: Colors.grey.shade400),
 
-                  // Read Full Article (Optional)
                   Center(
                     child: TextButton(
-                      onPressed: () {
-                        _launchURL(newsArticle);
+                      onPressed: () async {
+                        await _launchURL(newsArticle);
                       },
                       child: Text(
                         "Read Full Article",
