@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:news_app/main.dart';
 import 'package:news_app/models/categories_model.dart';
-import 'package:news_app/views/details_screen.dart';
+import 'package:news_app/views/details_view/details_screen.dart';
 
 Widget generateNewsSection(BuildContext context,
     AsyncSnapshot<CategoryModel> snapshot, DateFormat format) {

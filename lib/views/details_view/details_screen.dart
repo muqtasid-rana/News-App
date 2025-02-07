@@ -34,11 +34,10 @@ class DetailsScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Image(
-          image: AssetImage(
-            'assets/images/logowhite.png',
-          ),
-          height: 120,
-        ),
+            image: AssetImage(
+              'assets/images/logowhite.png',
+            ),
+            height: mq.height * .14),
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
@@ -48,14 +47,12 @@ class DetailsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // News Image with Gradient Overlay
             Stack(
               children: [
                 CachedNetworkImage(
                   height: mq.height * .35,
                   width: mq.width,
-                  imageUrl: newsImage ??
-                      'https://demofree.sirv.com/nope-not-here.jpg',
+                  imageUrl: newsImage,
                   fit: BoxFit.cover,
                   placeholder: (context, url) => const Center(
                       child: CircularProgressIndicator(color: Colors.blue)),

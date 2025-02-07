@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:io'; // Import for SocketException
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:news_app/utils/data/api_key.dart';
 import 'package:news_app/models/categories_model.dart';

@@ -8,18 +8,12 @@ class HeadingsText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: mq.width * 0.02,
-        bottom: mq.height * 0.01,
-      ),
-      child: Text(
-        text,
-        style: GoogleFonts.alata(
-            color: Colors.black,
-            fontSize: mq.width * .05,
-            fontWeight: FontWeight.bold),
-      ),
+    return Text(
+      text,
+      style: GoogleFonts.alata(
+          color: Colors.black,
+          fontSize: mq.width * .05,
+          fontWeight: FontWeight.bold),
     );
   }
 }

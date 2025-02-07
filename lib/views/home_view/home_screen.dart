@@ -7,10 +7,12 @@ import 'package:news_app/models/categories_model.dart';
 import 'package:news_app/models/news_model.dart';
 import 'package:news_app/utils/colors.dart';
 import 'package:news_app/models/view_models/news_view_model.dart';
-import 'package:news_app/views/categories_screen.dart';
-import 'package:news_app/views/details_screen.dart';
+import 'package:news_app/views/about_view/about_view.dart';
+import 'package:news_app/views/categories_view/categories_screen.dart';
+import 'package:news_app/views/details_view/details_screen.dart';
 import 'package:news_app/widgets/general_news_section.dart';
 import 'package:news_app/widgets/headings.dart';
+import 'package:news_app/widgets/my_appbar.dart';
 import 'package:news_app/widgets/my_drawer.dart';
 import 'package:news_app/widgets/spinkit_container.dart';
 
@@ -21,22 +23,18 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-enum FilterList { bbcNews, aryNews, alJazeera, bbcSports }
-
-FilterList? selectedmenu;
-
 class _HomeScreenState extends State<HomeScreen> {
   NewsViewModel newsViewModel = NewsViewModel();
   final format = DateFormat('MMMM dd, yyyy');
 
   int _selectedIndex = 0;
 
+  String name = 'bbc-news';
   final List<Widget> _screens = [
     HomeScreenContent(),
     CategoriesScreen(),
+    AboutView()
   ];
-
-  String name = 'bbc-news';
 
   void _onItemTapped(int index) {
     setState(() {
@@ -47,7 +45,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: MyDrawer(),
+      drawer: MyDrawer(onItemTapped: _onItemTapped),
+      appBar: MyAppbar(),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         backgroundColor: Colors.white,
@@ -66,9 +65,17 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class HomeScreenContent extends StatefulWidget {
+  const HomeScreenContent({
+    super.key,
+  });
+
   @override
   _HomeScreenContentState createState() => _HomeScreenContentState();
 }
+
+enum FilterList { bbcNews, aryNews, alJazeera, bbcSports }
+
+FilterList? selectedmenu;
 
 class _HomeScreenContentState extends State<HomeScreenContent> {
   NewsViewModel newsViewModel = NewsViewModel();
@@ -80,75 +87,80 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
   Widget build(BuildContext context) {
     var mq = MediaQuery.of(context).size;
     return Scaffold(
-      drawer: MyDrawer(),
-      appBar: AppBar(
-        surfaceTintColor: Colors.white,
-        backgroundColor: Colors.white,
-        centerTitle: true,
-        title: Image.asset('assets/images/logowhite.png', height: 120),
-        actions: [
-          Container(
-            height: mq.height * .04,
-            margin: const EdgeInsets.only(right: 10),
-            padding: const EdgeInsets.only(left: 10),
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(color: blue, blurRadius: 2, offset: Offset(0, 3))
-              ],
-              borderRadius: BorderRadius.circular(12),
-              color: Colors.white,
-            ),
-            child: Row(
-              children: [
-                Text(
-                  'Select Channel',
-                  style: TextStyle(
-                      color: blue, fontWeight: FontWeight.bold, fontSize: 12),
-                ),
-                PopupMenuButton<FilterList>(
-                  borderRadius: BorderRadius.circular(12),
-                  color: Colors.white,
-                  initialValue: selectedmenu,
-                  icon: Icon(Icons.arrow_drop_down, color: blue),
-                  onSelected: (FilterList item) {
-                    setState(() {
-                      name = item == FilterList.bbcNews
-                          ? 'bbc-news'
-                          : item == FilterList.aryNews
-                              ? 'ary-news'
-                              : item == FilterList.alJazeera
-                                  ? 'al-jazeera-english'
-                                  : 'bbc-sport';
-                      selectedmenu = item;
-                    });
-                  },
-                  itemBuilder: (context) => const [
-                    PopupMenuItem(
-                        value: FilterList.bbcNews, child: Text("BBC News")),
-                    PopupMenuItem(
-                        value: FilterList.aryNews, child: Text("Ary News")),
-                    PopupMenuItem(
-                        value: FilterList.alJazeera,
-                        child: Text("Al Jazeera News")),
-                    PopupMenuItem(
-                        value: FilterList.bbcSports, child: Text("BBC Sports")),
-                  ],
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              height: 10,
+            Padding(
+              padding: EdgeInsets.only(
+                left: mq.width * 0.02,
+                bottom: mq.height * 0.01,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  HeadingsText(text: 'Top Headlines'),
+                  Container(
+                    height: mq.height * .04,
+                    margin: const EdgeInsets.only(right: 10),
+                    padding: const EdgeInsets.only(left: 10),
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                            color: blue, blurRadius: 2, offset: Offset(0, 3))
+                      ],
+                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.white,
+                    ),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Select Channel',
+                          style: TextStyle(
+                              color: blue,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12),
+                        ),
+                        PopupMenuButton<FilterList>(
+                          borderRadius: BorderRadius.circular(12),
+                          color: Colors.white,
+                          initialValue: selectedmenu,
+                          icon: Icon(Icons.arrow_drop_down, color: blue),
+                          onSelected: (FilterList item) {
+                            setState(() {
+                              name = item == FilterList.bbcNews
+                                  ? 'bbc-news'
+                                  : item == FilterList.aryNews
+                                      ? 'ary-news'
+                                      : item == FilterList.alJazeera
+                                          ? 'al-jazeera-english'
+                                          : 'bbc-sport';
+                              selectedmenu = item;
+                            });
+                          },
+                          itemBuilder: (context) => const [
+                            PopupMenuItem(
+                                value: FilterList.bbcNews,
+                                child: Text("BBC News")),
+                            PopupMenuItem(
+                                value: FilterList.aryNews,
+                                child: Text("Ary News")),
+                            PopupMenuItem(
+                                value: FilterList.alJazeera,
+                                child: Text("Al Jazeera News")),
+                            PopupMenuItem(
+                                value: FilterList.bbcSports,
+                                child: Text("BBC Sports")),
+                          ],
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
-            HeadingsText(text: 'Top Headlines'),
             Expanded(
               child: FutureBuilder<NewsModel>(
                 future: newsViewModel.newsRepository(name),

@@ -31,16 +31,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   @override
   @override
   Widget build(BuildContext context) {
+    var mq = MediaQuery.of(context).size;
     return Scaffold(
-      drawer: MyDrawer(),
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        title: const Image(
-          image: AssetImage('assets/images/logowhite.png'),
-          height: 120,
-        ),
-      ),
       backgroundColor: bgcolor,
       body: Padding(
         padding: const EdgeInsets.all(12.0),
