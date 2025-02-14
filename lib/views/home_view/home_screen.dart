@@ -301,7 +301,10 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
                               },
                             ),
                           ),
-                          HeadingsText(text: 'General'),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: HeadingsText(text: 'General'),
+                          ),
                           SizedBox(
                             height: mq.height * .4,
                             child: FutureBuilder<CategoryModel>(

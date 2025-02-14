@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/views/home_view/home_screen.dart';
+import 'package:news_app/views/splash_view/splash_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      home: const HomeScreen(),
+      home: const SplashView(),
     );
   }
 }

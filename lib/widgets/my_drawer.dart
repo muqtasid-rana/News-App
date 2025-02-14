@@ -41,16 +41,6 @@ class MyDrawer extends StatelessWidget {
               onItemTapped!(1);
             },
           ),
-          ListTile(
-            leading: Icon(Icons.info, color: Colors.white),
-            title: Text('About', style: TextStyle(color: Colors.white)),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => AboutView()),
-              );
-            },
-          ),
         ],
       ),
     );

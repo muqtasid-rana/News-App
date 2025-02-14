@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:news_app/res/app_urls/app_urls.dart';
 import 'package:news_app/utils/data/api_key.dart';
 import 'package:news_app/models/categories_model.dart';
 import 'package:news_app/models/news_model.dart';
@@ -9,7 +10,7 @@ class NewsRepository {
   Future<NewsModel> fetchNewsHeadlinesAPI(String channelName) async {
     try {
       final uri =
-          'https://newsapi.org/v2/top-headlines?sources=$channelName&apiKey=${ApiKey.API_KEY}';
+          '${AppUrls.topHeadlines}sources=$channelName&apiKey=${ApiKey.API_KEY}';
 
       final response = await http.get(Uri.parse(uri));
 
@@ -30,8 +31,7 @@ class NewsRepository {
 
   Future<CategoryModel> fetchCategoryAPI(String categoryname) async {
     try {
-      final uri =
-          'https://newsapi.org/v2/everything?q=$categoryname&apiKey=${ApiKey.API_KEY}';
+      final uri = '${AppUrls.category}q=$categoryname&apiKey=${ApiKey.API_KEY}';
 
       final response = await http.get(Uri.parse(uri));
 
